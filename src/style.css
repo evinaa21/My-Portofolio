@@ -1,0 +1,155 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(#2b1055, #7597de);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+    z-index: 10000;
+    transition: background 0.3s ease;
+}
+
+header .logo {
+    max-width: 200px;
+    color: azure;
+    font-weight: 700;
+    font-size: 1.5em;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+header ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header ul li {
+    list-style: none;
+    margin-right: 20px;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: azure;
+    padding: 6px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+header ul li a:hover,
+header ul li a.active {
+    background: azure;
+    color: #2b1055;
+}
+
+/* Hero Section */
+section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, #090f30, transparent);
+    z-index: 1000;
+}
+
+/* Images */
+section img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+section img#moon {
+    mix-blend-mode: screen;
+}
+
+/* Text Animation */
+#text {
+    position: absolute;
+    color: #fff;
+    font-size: 7.5vw;
+    z-index: 9;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fadeIn 2s ease-out forwards;
+}
+
+#btn {
+    text-decoration: none;
+    padding: 10px 30px;
+    display: inline-block;
+    border-radius: 40px;
+    background: #fff;
+    color: #2b1055;
+    font-size: 1.5em;
+    z-index: 9;
+    transform: translateY(100px);
+}
+
+/* Sections */
+.sec {
+    position: relative;
+    padding: 100px;
+    background: #090f30;
+    text-align: center;
+}
+
+.sec h2 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.sec p {
+    color: #fff;
+    font-size: 1.2em;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

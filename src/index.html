@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Evina Tershalla-Portofolio</title>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Evina Tershalla</a>
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </header>
+
+    <section id="home">
+        <img src="stars.png" id="stars">
+        <img src="moon.png" id="moon">
+        <h2 id="text">My Portofolio</h2>
+        <a href="#about" id="btn">Explore</a>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I'm a passionate developer and designer who loves creating innovative solutions.</p>
+    </section>
+
+    <section id="services">
+        <h2>My Services</h2>
+        <div class="service-card">
+            <h3>Web Development</h3>
+            <p>Creating responsive, beautiful websites using HTML, CSS, JavaScript, and frameworks.</p>
+        </div>
+        <div class="service-card">
+            <h3>UI/UX Design</h3>
+            <p>Designing intuitive and visually stunning user interfaces that are easy to use.</p>
+        </div>
+        <div class="service-card">
+            <h3>App Development</h3>
+            <p>Building mobile applications that run seamlessly on both Android and iOS.</p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div class="project-card">
+            <h3>Project 1</h3>
+            <p>A sleek to-do list web app with local storage functionality.</p>
+            <a href="#">View Project</a>
+        </div>
+        <div class="project-card">
+            <h3>Project 2</h3>
+            <p>An e-commerce platform with user authentication and dynamic product listings.</p>
+            <a href="#">View Project</a>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skill">
+            <p>HTML</p>
+            <div class="progress-bar html"></div>
+        </div>
+        <div class="skill">
+            <p>CSS</p>
+            <div class="progress-bar css"></div>
+        </div>
+        <div class="skill">
+            <p>JavaScript</p>
+            <div class="progress-bar js"></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form action="https://formsubmit.co/your-email" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <script>
+    let moon = document.getElementById('moon');
+    let stars = document.getElementById('stars');
+    let text = document.getElementById('text');
+
+    // Apply parallax and fade effect on scroll
+    window.addEventListener('scroll', function () {
+        let value = window.scrollY;
+
+        // Moon animation (applied only once)
+        if (value > 50 && !moon.classList.contains('animated')) {
+            moon.classList.add('animated');
+            moon.style.animation = 'moonDrop 2s ease-out forwards';
+        }
+
+        // Parallax effect for stars and moon
+        stars.style.left = value * 0.25 + 'px';
+        moon.style.top = (value * 1.05) + 'px';
+
+        // Fade effect for text
+        let fadeOutStart = 50;
+        let fadeOutEnd = 300;
+
+        if (value < fadeOutStart) {
+            text.style.opacity = "1";
+            text.style.transform = "scale(1)";
+        } else if (value < fadeOutEnd) {
+            let opacity = 1 - (value - fadeOutStart) / (fadeOutEnd - fadeOutStart);
+            let scale = 1 - (value - fadeOutStart) / (fadeOutEnd - fadeOutStart) * 0.2;
+            text.style.opacity = opacity;
+            text.style.transform = `scale(${scale})`;
+        } else {
+            text.style.opacity = "0";
+            text.style.transform = "scale(0.8)";
+        }
+    });
+
+    // Smooth transition between sections
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Activate corresponding navbar link on scroll
+    let sections = document.querySelectorAll("section");
+    let navLinks = document.querySelectorAll("header ul li a");
+
+    window.addEventListener("scroll", () => {
+        let scrollY = window.scrollY;
+
+        sections.forEach((section) => {
+            let sectionTop = section.offsetTop - 100; // Offset to trigger earlier
+            let sectionHeight = section.offsetHeight;
+
+            // Activate the link corresponding to the visible section
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                navLinks.forEach((link) => link.classList.remove("active"));
+                document.querySelector(`header ul li a[href="#${section.id}"]`)?.classList.add("active");
+            }
+        });
+    });
+</script>
+</body>
+</html>
