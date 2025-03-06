@@ -8,12 +8,13 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-image:'../Images/clouds.png' ;
-    min-height: 100vh;
-    overflow-x: hidden;
+    background-image: url('../Images/clouds.png'); /* Fixed syntax */
     background-attachment: fixed;
     background-size: cover;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
+
 body::before {
     content: "";
     position: fixed;
@@ -21,10 +22,23 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image:'../Images/clouds.png' ;
+    background-image: url('../Images/clouds.png');
+    background-size: cover;
+    background-position: center;
     z-index: -1;
+    opacity: 1; /* Ensure it's fully visible */
 }
 
+
+/* Parallax Clouds (Separate from Background Clouds) */
+.clouds {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    transform: translateX(0%);
+    z-index: 1;
+    transition: opacity 0.2s ease-out;
+}
 
 /* Navbar */
 header {
@@ -45,7 +59,8 @@ header {
 
 
 header .logo {
-    max-width: 200px;
+    font-family: 'Poppins', sans-serif;
+    max-width: 300px;
     color: rgb(255, 255, 255);
     font-weight: 700;
     font-size: 1.5em;
@@ -147,33 +162,46 @@ section img#clouds {
 #linkedin {
     position: absolute;
     color: #fff;
-    font-size: 3vw;
+    font-size: 3.5vw;
     z-index: 9;
     opacity: 0;
-    left: calc(200px + 160px); 
-    bottom: 7.95cm;
+    left: calc(200px + 220px);  /* Increased the value to move it further right */
+    bottom: 7.53cm;
+    transform: translateY(-50px);
+    animation: fadeIn 2s ease-out forwards;
+}
+#github {
+    position: absolute;
+    color: #fff;
+    font-size: 3.5vw;
+    z-index: 9;
+    opacity: 0;
+    left: calc(200px + 320px);  /* Increased the value to move it further right */
+    bottom: 7.53cm;
     transform: translateY(-50px);
     animation: fadeIn 2s ease-out forwards;
 }
 
 
+
 #btn {
     text-decoration: none;
-    padding: 10px 30px;
+    padding: 15px 40px;  /* Increased padding for bigger button */
     display: inline-block;
     border-radius: 40px;
     background: #fff;
     color: #2b1055;
-    font-size: 1.5em;
+    font-size: 2em;  /* Increased font size for bigger text */
     z-index: 10;
     position: absolute;
     left: 200px;
-    top: 450px;
+    top: 61%;
     opacity: 0; /* Start as invisible */
     transform: translateY(-50px); /* Start above */
     animation: slideInFromAbove 2s ease-out forwards; /* Animation to bring it into view */
     transition: opacity 0.5s ease, transform 0.8s ease;
 }
+
 
 /* Animation to move the button from above */
 @keyframes slideInFromAbove {
@@ -209,9 +237,7 @@ section img#clouds {
 }
 
 .sec h2, .sec p{
-    opacity: 0;
     transform: translateY(50px);
-    transition: opacity 0.5s ease, transform 0.8s ease;
 }
 
 .sec.show h2, .sec.show p {
@@ -249,8 +275,6 @@ header.scrolled {
     color: #fff;
     padding: 100px 20px;
     z-index: 1;
-    opacity: 0; /* Initially hidden */
-    transition: opacity 1s ease-in-out; /* Smooth opacity transition */
     overflow: hidden;
 }
 #about h2 {
@@ -261,22 +285,64 @@ header.scrolled {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
     position: absolute;
     top: 10%;
-    left: 50%;
-    transform: translateX(-50%) translateY(50px); /* Initially translate down to hide */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth transition */
-}
-
-#avatar{
-    border-radius: 50%;
+    left: 60%;
+    transform: translateX(-50%) translateY(50px);
+    opacity: 1;
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 #about p {
-    font-size: 1.5em;
+    font-size: 1em;
     margin-bottom: 40px;
-    max-width: 600px; /* Limit text width */
+    overflow: hidden; 
+    max-width: 700px;
     line-height: 1.5;
+    padding: 20px; /* Add padding to create space inside the square */
+    border: 3px solid #fff; /* White border */
+    border-radius: 10px; /* Rounded corners (optional, if you want slightly rounded edges) */
+    transition: box-shadow 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.6); /* Smooth transition for glowing effect */
+    position: absolute; /* Position it absolutely */
+    right: 23%; /* 20px from the right edge */
+    top: 60%; /* Vertically center it */
+    transform: translateY(-50%); /* Adjust to perfectly center it vertically */
 }
+
+/* Glowing border effect on hover */
+#about p:hover {
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.7); /* Glowing effect */
+
+
+}
+
+/* Avatar Container */
+.avatar-container {
+    position: absolute;
+    border: 5px solid #fff;
+    top: 59%; /* Center vertically */
+    left: 10%; /* Position on the left side */
+    transform: translateY(-50%); /* Adjust to center vertically */
+    width: 500px; /* Adjust size */
+    height: 500px; /* Adjust size to keep it a circle */
+    border-radius: 50%; /* Circular shape */
+    overflow: hidden; /* Ensure the image fits within the circle */
+    transition: box-shadow 0.3s ease; /* Smooth transition for glowing effect */
+}
+
+/* Avatar Image */
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image fills the circle */
+    border-radius: 50%; /* Keep the image circular */
+}
+
+/* Glowing Border on Hover */
+.avatar-container:hover {
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.7); /* Glowing effect */
+}
+
+
 
 #about.show {
     opacity: 1; /* Fade in when class .show is added */
@@ -284,18 +350,26 @@ header.scrolled {
 
 .about-buttons {
     display: flex;
+    flex-direction: column;  /* Stack buttons vertically */
     gap: 20px;
-    justify-content: center;
+    position: absolute;
+    right: 5%;               /* Position buttons 5% from the right edge */
+    top: 50%;                /* Adjust this to position the buttons vertically */
+    transform: translateY(-50%); /* Optional: Center buttons vertically */
 }
 
 .about-btn {
     text-decoration: none;
-    padding: 12px 25px;
+    padding: 15px 30px;  /* Make buttons bigger */
     background-color: #fff;
     color: #2b1055;
-    font-size: 1.2em;
+    font-size: 1.4em;     /* Increase font size */
     font-weight: 600;
     border-radius: 50px;
+    display: flex;        /* Use flexbox to align icon and text */
+    align-items: center;  /* Vertically center the text and icon */
+    justify-content: center;
+    gap: 10px;            /* Space between icon and text */
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
@@ -307,13 +381,12 @@ header.scrolled {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
-
-.fade-in {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px); /* Slight offset for smooth effect */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+.about-btn i {
+    font-size: 1.5em;      /* Adjust icon size */
 }
+
+
+
 
 .fade-in.show {
     opacity: 1;
