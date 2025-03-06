@@ -8,10 +8,23 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(#2b1055, #7597de);
+    background-image:'../Images/clouds.png' ;
     min-height: 100vh;
     overflow-x: hidden;
+    background-attachment: fixed;
+    background-size: cover;
 }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:'../Images/clouds.png' ;
+    z-index: -1;
+}
+
 
 /* Navbar */
 header {
@@ -24,19 +37,25 @@ header {
     align-items: center;
     padding: 20px 100px;
     z-index: 10000;
-    transition: background 0.3s ease;
+    background: transparent; /* Transparent background initially */
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+    backdrop-filter: blur(0px); /* Apply blur effect */
 }
+
+
 
 header .logo {
     max-width: 200px;
-    color: azure;
+    color: rgb(255, 255, 255);
     font-weight: 700;
     font-size: 1.5em;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
 }
 
+/* Navbar links styling */
 header ul {
     display: flex;
     justify-content: center;
@@ -50,16 +69,22 @@ header ul li {
 
 header ul li a {
     text-decoration: none;
-    color: azure;
-    padding: 6px;
-    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(84, 99, 130, 0.6); /* Adjusted color with transparency */
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 600;
     transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 header ul li a:hover,
 header ul li a.active {
-    background: azure;
+    background: rgba(255, 255, 255, 0.8);
     color: #2b1055;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 /* Hero Section */
@@ -73,6 +98,7 @@ section {
     align-items: center;
     overflow: hidden;
     text-align: center;
+    background: transparent;
 }
 
 section::before {
@@ -94,9 +120,17 @@ section img {
     height: 100%;
     object-fit: cover;
     pointer-events: none;
+    section img {
+        transform: translateY(calc(var(--scroll) * 0.3));
+    }
+    
 }
 
+
 section img#moon {
+    mix-blend-mode: screen;
+}
+section img#clouds {
     mix-blend-mode: screen;
 }
 
@@ -110,6 +144,18 @@ section img#moon {
     transform: translateY(-50px);
     animation: fadeIn 2s ease-out forwards;
 }
+#linkedin {
+    position: absolute;
+    color: #fff;
+    font-size: 3vw;
+    z-index: 9;
+    opacity: 0;
+    left: calc(200px + 160px); 
+    bottom: 7.95cm;
+    transform: translateY(-50px);
+    animation: fadeIn 2s ease-out forwards;
+}
+
 
 #btn {
     text-decoration: none;
@@ -119,9 +165,28 @@ section img#moon {
     background: #fff;
     color: #2b1055;
     font-size: 1.5em;
-    z-index: 9;
-    transform: translateY(100px);
+    z-index: 10;
+    position: absolute;
+    left: 200px;
+    top: 450px;
+    opacity: 0; /* Start as invisible */
+    transform: translateY(-50px); /* Start above */
+    animation: slideInFromAbove 2s ease-out forwards; /* Animation to bring it into view */
+    transition: opacity 0.5s ease, transform 0.8s ease;
 }
+
+/* Animation to move the button from above */
+@keyframes slideInFromAbove {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px); /* Start from above */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End at final position */
+    }
+}
+
 
 /* Sections */
 .sec {
@@ -133,13 +198,33 @@ section img#moon {
 
 .sec h2 {
     font-size: 3.5em;
-    margin-bottom: 10px;
+    left: 5cm;
+    top: 8cm;
     color: #fff;
 }
 
 .sec p {
     color: #fff;
     font-size: 1.2em;
+}
+
+.sec h2, .sec p{
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.8s ease;
+}
+
+.sec.show h2, .sec.show p {
+    opacity: 1;
+    transform: translateY(0);
+}
+#moon {
+    position: absolute;
+    bottom: 20px; /* Adjust as needed */
+    right: 0; /* Place the moon so its right edge is at the right side of the screen */
+    transform: translateX(50%); /* Move it 50% off to the right so it's partially visible */
+    z-index: 1;
+    transition: opacity 0.2s ease-out; /* Smooth opacity transition */
 }
 
 /* Animations */
@@ -153,3 +238,101 @@ section img#moon {
         transform: translateY(0);
     }
 }
+header.scrolled {
+    background: rgba(23, 10, 44, 0.6); /* Dark transparent */
+    backdrop-filter: blur(10px); /* Glass effect */
+    transition: all 0.3s ease-in-out;
+}
+
+#about {
+    position: relative;
+    color: #fff;
+    padding: 100px 20px;
+    z-index: 1;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s ease-in-out; /* Smooth opacity transition */
+    overflow: hidden;
+}
+#about h2 {
+    font-size: 5.5em;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%) translateY(50px); /* Initially translate down to hide */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth transition */
+}
+
+#avatar{
+    border-radius: 50%;
+}
+
+#about p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    max-width: 600px; /* Limit text width */
+    line-height: 1.5;
+}
+
+#about.show {
+    opacity: 1; /* Fade in when class .show is added */
+}
+
+.about-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.about-btn {
+    text-decoration: none;
+    padding: 12px 25px;
+    background-color: #fff;
+    color: #2b1055;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.about-btn:hover {
+    background: #2b1055;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+
+.fade-in {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px); /* Slight offset for smooth effect */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+
+.clouds {
+    position: absolute;
+     bottom: 20px; /* Adjust as needed */
+     right: 0; /* Place the moon so its right edge is at the right side of the screen */
+     transform: translateX(0%); /* Move it 50% off to the right so it's partially visible */
+     z-index: 1;
+     transition: opacity 0.2s ease-out; /* Add opacity transition */
+ }
+
+
+
+
+
+

@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Evina Tershalla-Portofolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Evina Tershalla-Portfolio</title>
 </head>
 <body>
     <header>
         <a href="#" class="logo">Evina Tershalla</a>
         <ul>
-            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#home" >Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#projects">Projects</a></li>
@@ -19,20 +20,40 @@
         </ul>
     </header>
 
-    <section id="home">
-        <img src="stars.png" id="stars">
-        <img src="moon.png" id="moon">
-        <h2 id="text">My Portofolio</h2>
-        <a href="#about" id="btn">Explore</a>
+    <section class="sec fade-in" id="home">
+        <img src="../Images/stars.png" class="stars">
+        <img src="../Images/moon1.png" id="moon">
+        <h2 id="text">My Portfolio</h2>
+        <a href="#about" title="Explore" id="btn">Explore</a>
+        <a href="https://al.linkedin.com/in/evina-tershalla-345622353" title="Linkedin" target="_blank" id="linkedin">
+            <i class="fab fa-linkedin"></i> 
+        </a>
+        <a href="https://al.linkedin.com/in/evina-tershalla-345622353" title="Linkedin" target="_blank" id="linkedin">
+            <i class="fab fa-linkedin"></i> 
+        </a>
     </section>
 
-    <section id="about">
+    <!-- About Section -->
+    <section class="sec fade-in" id="about">
+        <img src="../Images/clouds.png" class="stars">
+        <img src="../Images/clouds.png" class="clouds">
+        <img src="../Images/moon.png" id="Avatar" alt="Avatar">
         <h2>About Me</h2>
-        <p>I'm a passionate developer and designer who loves creating innovative solutions.</p>
+        <p>Student</p>
+        <div class="about-buttons">
+            <a href="#" class="btn about-btn">Download My CV</a>
+            <a href="#contact" class="btn about-btn">Contact Me</a>
+        </div>
     </section>
+    
+      
 
-    <section id="services">
+    <!-- Services Section -->
+    <section class="sec fade-in" id="services">
+        <img src="../Images/clouds.png" class="stars">
+            <img src="../Images/clouds.png" class="clouds">
         <h2>My Services</h2>
+
         <div class="service-card">
             <h3>Web Development</h3>
             <p>Creating responsive, beautiful websites using HTML, CSS, JavaScript, and frameworks.</p>
@@ -47,7 +68,10 @@
         </div>
     </section>
 
-    <section id="projects">
+    <!-- Projects Section -->
+    <section class="sec fade-in" id="projects">
+        <img src="../Images/clouds.png" class="stars">
+            <img src="../Images/clouds.png" class="clouds">
         <h2>My Projects</h2>
         <div class="project-card">
             <h3>Project 1</h3>
@@ -61,7 +85,10 @@
         </div>
     </section>
 
-    <section id="skills">
+    <!-- Skills Section -->
+    <section class="sec fade-in" id="skills">
+        <img src="../Images\clouds.png" class="stars">
+            <img src="../Images\clouds.png" class="clouds">
         <h2>Skills</h2>
         <div class="skill">
             <p>HTML</p>
@@ -77,7 +104,8 @@
         </div>
     </section>
 
-    <section id="contact">
+    <!-- Contact Section -->
+    <section class="sec fade-in" id="contact">
         <h2>Contact Me</h2>
         <form action="https://formsubmit.co/your-email" method="POST">
             <input type="text" name="name" placeholder="Your Name" required>
@@ -86,72 +114,7 @@
             <button type="submit">Send</button>
         </form>
     </section>
-
-    <script>
-    let moon = document.getElementById('moon');
-    let stars = document.getElementById('stars');
-    let text = document.getElementById('text');
-
-    // Apply parallax and fade effect on scroll
-    window.addEventListener('scroll', function () {
-        let value = window.scrollY;
-
-        // Moon animation (applied only once)
-        if (value > 50 && !moon.classList.contains('animated')) {
-            moon.classList.add('animated');
-            moon.style.animation = 'moonDrop 2s ease-out forwards';
-        }
-
-        // Parallax effect for stars and moon
-        stars.style.left = value * 0.25 + 'px';
-        moon.style.top = (value * 1.05) + 'px';
-
-        // Fade effect for text
-        let fadeOutStart = 50;
-        let fadeOutEnd = 300;
-
-        if (value < fadeOutStart) {
-            text.style.opacity = "1";
-            text.style.transform = "scale(1)";
-        } else if (value < fadeOutEnd) {
-            let opacity = 1 - (value - fadeOutStart) / (fadeOutEnd - fadeOutStart);
-            let scale = 1 - (value - fadeOutStart) / (fadeOutEnd - fadeOutStart) * 0.2;
-            text.style.opacity = opacity;
-            text.style.transform = `scale(${scale})`;
-        } else {
-            text.style.opacity = "0";
-            text.style.transform = "scale(0.8)";
-        }
-    });
-
-    // Smooth transition between sections
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Activate corresponding navbar link on scroll
-    let sections = document.querySelectorAll("section");
-    let navLinks = document.querySelectorAll("header ul li a");
-
-    window.addEventListener("scroll", () => {
-        let scrollY = window.scrollY;
-
-        sections.forEach((section) => {
-            let sectionTop = section.offsetTop - 100; // Offset to trigger earlier
-            let sectionHeight = section.offsetHeight;
-
-            // Activate the link corresponding to the visible section
-            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                navLinks.forEach((link) => link.classList.remove("active"));
-                document.querySelector(`header ul li a[href="#${section.id}"]`)?.classList.add("active");
-            }
-        });
-    });
-</script>
+    
+    <script src="script.js" defer></script>
 </body>
 </html>
