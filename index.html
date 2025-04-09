@@ -572,14 +572,12 @@
 <!-- ======= Contact Section ======= -->
 <section id="contact" class="contact">
     <div class="container">
-
         <div class="section-title">
             <h2>Contact</h2>
             <p>If you need any help or have any idea for a project, please fill the form below.</p>
         </div>
 
         <div class="row" data-aos="fade-in">
-
             <div class="col-lg-5 d-flex align-items-stretch">
                 <div class="info">
                     <div class="address">
@@ -599,13 +597,14 @@
                         <h4>Call:</h4>
                         <p>+355 68 878 8786</p>
                     </div>
-
                 </div>
-
             </div>
 
             <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                <form action="https://formspree.io/f/xjkyjypr" method="POST" role="form" class="php-email-form">
+                <form name="contact" method="POST" data-netlify="true" class="php-email-form">
+                    <!-- Hidden form name to prevent confirmation page -->
+                    <input type="hidden" name="form-name" value="contact">
+
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="name">Your Name</label>
@@ -627,14 +626,11 @@
                     </div>
                     <div class="text-center"><button type="submit">Send Message</button></div>
                 </form>
-                
-
             </div>
-
         </div>
-
     </div>
 </section><!-- End Contact Section -->
+
 
 
 
