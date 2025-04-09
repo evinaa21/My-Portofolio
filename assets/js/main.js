@@ -253,3 +253,40 @@
   new PureCounter();
 
 })()
+
+// Contact form submission handling
+document.querySelector('.php-email-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  
+  const form = this;
+  const successMessage = document.querySelector('.sent-message');
+  const errorMessage = document.querySelector('.error-message');
+
+  // Reset messages to hide previous error/success
+  successMessage.style.display = 'none';
+  errorMessage.style.display = 'none';
+
+  // Show loading message
+  document.querySelector('.loading').style.display = 'block';
+
+  fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+  })
+  .then(response => {
+      if (response.ok) {
+          successMessage.style.display = 'block';  // Show success message
+          form.reset();  // Reset the form after submission
+      } else {
+          throw new Error('Form submission failed');
+      }
+  })
+  .catch(error => {
+      errorMessage.style.display = 'block';  // Show error message
+      errorMessage.innerHTML = 'There was an error sending your message. Please try again.';
+  })
+  .finally(() => {
+      document.querySelector('.loading').style.display = 'none';  // Hide loading
+  });
+});
+
