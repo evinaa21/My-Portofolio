@@ -601,33 +601,33 @@
             </div>
 
             <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+                <form name="contact" method="POST" action="/" data-netlify="true" class="php-email-form">
 
-                    <!-- Netlify form config -->
+                    <!-- Hidden form name to prevent confirmation page -->
                     <input type="hidden" name="form-name" value="contact">
-                    <p class="hidden">
-                      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-                    </p>
-                  
+                    <input type="hidden" name="redirect" value="/thank-you.html">
+
                     <div class="row">
-                      <div class="form-group col-md-6">
-                        <label for="name">Your Name</label>
-                        <input type="text" name="name" class="form-control" id="name" required>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="email">Your Email</label>
-                        <input type="email" class="form-control" name="email" id="email" required>
-                      </div>
+                        <div class="form-group col-md-6">
+                            <label for="name">Your Name</label>
+                            <input type="text" name="name" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Your Email</label>
+                            <input type="email" class="form-control" name="email" id="email" required>
+                        </div>
                     </div>
-                  
                     <div class="form-group">
-                      <label for="message">Message</label>
-                      <textarea class="form-control" name="message" rows="3" required></textarea>
+                        <label for="message">Message</label>
+                        <textarea class="form-control" name="message" rows="3" required></textarea>
                     </div>
-                  
+                    <div class="my-3">
+                        <div class="loading">Loading...</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                    </div>
                     <div class="text-center"><button type="submit">Send Message</button></div>
-                  </form>
-                  
+                </form>
             </div>
         </div>
     </div>
@@ -660,7 +660,6 @@
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/vendor/typed.js/typed.umd.js"></script>
     <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
