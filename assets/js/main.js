@@ -253,3 +253,34 @@
   new PureCounter();
 
 })()
+
+// Contact Form Submission
+document.getElementById("contact-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const loading = form.querySelector(".loading");
+    const errorMessage = form.querySelector(".error-message");
+    const sentMessage = form.querySelector(".sent-message");
+
+    loading.style.display = "block";
+    errorMessage.style.display = "none";
+    sentMessage.style.display = "none";
+
+    try {
+        await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+        });
+
+        form.reset();
+        loading.style.display = "none";
+        sentMessage.style.display = "block";
+    } catch (error) {
+        loading.style.display = "none";
+        errorMessage.style.display = "block";
+        errorMessage.textContent = "Oops! Something went wrong. Please try again.";
+    }
+});
