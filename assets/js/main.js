@@ -255,20 +255,21 @@
 })()
 
 // Contact form submission handling
-document.querySelector('.php-email-form').addEventListener('submit', function (e) {
+document.querySelector('.php-email-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  
+
   const form = this;
   const successMessage = document.querySelector('.sent-message');
   const errorMessage = document.querySelector('.error-message');
 
-  // Reset messages to hide previous error/success
+  // Reset messages
   successMessage.style.display = 'none';
   errorMessage.style.display = 'none';
 
   // Show loading message
   document.querySelector('.loading').style.display = 'block';
 
+  // Send the form data to Formspree using fetch
   fetch(form.action, {
       method: form.method,
       body: new FormData(form),
@@ -289,4 +290,3 @@ document.querySelector('.php-email-form').addEventListener('submit', function (e
       document.querySelector('.loading').style.display = 'none';  // Hide loading
   });
 });
-
