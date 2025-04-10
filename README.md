@@ -25,10 +25,8 @@ From **book rental systems** and **currency converters** to **travel recommendat
 - React, Angular, Next.js, HTML5, CSS3, Tailwind CSS
 
 ### ⚙️ Backend & Frameworks
-- Spring Boot, Hibernate, REST, GraphQL, Microservices
+- Spring Boot, 
 
-### ☁️ Cloud & DevOps
-- AWS (EC2, S3, RDS, Lambda), Azure, Docker, Kubernetes, Jenkins, CI/CD, Shell Scripting
 
 ### 🗄️ Databases & Messaging
 - MySQL, MongoDB, DynamoDB, Redis, RabbitMQ, Kafka
@@ -40,10 +38,6 @@ From **book rental systems** and **currency converters** to **travel recommendat
 
 ## 💼 Experience
 
-**Software Engineer 2** at **Hubster** (Remote, 2023–Present)  
-- Designed and implemented Java + AWS solutions using scalable microservices architecture  
-- Integrated security measures on Ubuntu systems  
-- Built efficient CI/CD pipelines and Dockerized applications  
 
 ---
 
